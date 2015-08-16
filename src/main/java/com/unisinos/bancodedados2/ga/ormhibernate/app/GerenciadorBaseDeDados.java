@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Teste;
+import com.unisinos.bancodedados2.ga.ormhibernate.model.Holding;
 
 public class GerenciadorBaseDeDados {
 
@@ -17,7 +17,7 @@ public class GerenciadorBaseDeDados {
 		System.out.println("Iniciando transação.");
 		em.getTransaction().begin();
 		System.out.println("Gravando um registro.");
-		em.persist(new Teste("foo"));
+		em.persist(new Holding("hteste","Holding Teste"));
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();
 	}
