@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Holding;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Loja;
+import com.unisinos.bancodedados2.ga.ormhibernate.model.Tamanho;
 
 public class GerenciadorBaseDeDados {
 
@@ -21,16 +22,19 @@ public class GerenciadorBaseDeDados {
 		Holding holding = new Holding("hteste5","Holding Teste 5");
 		Empresa empresa = new Empresa("emp4","Empresa teste 4","Empresa","Rua Teste", holding);
 		Loja loja = new Loja("lojateste",empresa,"Loja Teste",new Date(),12);
+		Tamanho tamanho = new Tamanho("XG","Extra grande");
 		
 		System.out.println("Iniciando transação.");
 		em.getTransaction().begin();
 		
-		System.out.println("Gravando um registro: holding");
+		/*System.out.println("Gravando um registro: holding");
 		em.persist(holding);
 		System.out.println("Gravando um registro: empresa");
 		em.persist(empresa);
 		System.out.println("Gravando um registro: loja");
-		em.persist(loja);
+		em.persist(loja);*/
+		System.out.println("Gravando um registro: tamanho");
+		em.persist(tamanho);
 				
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();
