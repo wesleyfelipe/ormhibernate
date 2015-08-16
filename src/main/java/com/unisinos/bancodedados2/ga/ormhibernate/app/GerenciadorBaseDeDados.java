@@ -25,6 +25,7 @@ public class GerenciadorBaseDeDados {
 		em.persist(holding);
 		System.out.println("Gravando um registro: empresa");
 		em.persist(empresa);
+		
 				
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();
