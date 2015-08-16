@@ -33,7 +33,6 @@ public class Empresa implements Serializable {
 	@JoinColumn(name = "holding", foreignKey = @ForeignKey(name = "fk_empresa_holding"))
 	private Holding holding;
 	
-	
 	public Empresa() {
 		super();
 	}

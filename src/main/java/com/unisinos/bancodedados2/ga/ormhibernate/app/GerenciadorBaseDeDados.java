@@ -1,11 +1,14 @@
 package com.unisinos.bancodedados2.ga.ormhibernate.app;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Holding;
+import com.unisinos.bancodedados2.ga.ormhibernate.model.Loja;
 
 public class GerenciadorBaseDeDados {
 
@@ -15,8 +18,9 @@ public class GerenciadorBaseDeDados {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("BD2");
 		EntityManager em = emf.createEntityManager();
 
-		Holding holding = new Holding("hteste2","Holding Teste 2");
-		Empresa empresa = new Empresa("emp1","Empresa teste1","Empresa","Rua Teste", holding);
+		Holding holding = new Holding("hteste5","Holding Teste 5");
+		Empresa empresa = new Empresa("emp4","Empresa teste 4","Empresa","Rua Teste", holding);
+		Loja loja = new Loja("lojateste",empresa,"Loja Teste",new Date(),12);
 		
 		System.out.println("Iniciando transação.");
 		em.getTransaction().begin();
@@ -25,7 +29,8 @@ public class GerenciadorBaseDeDados {
 		em.persist(holding);
 		System.out.println("Gravando um registro: empresa");
 		em.persist(empresa);
-		
+		System.out.println("Gravando um registro: loja");
+		em.persist(loja);
 				
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();
