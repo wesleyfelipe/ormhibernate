@@ -1,12 +1,17 @@
 package com.unisinos.bancodedados2.ga.ormhibernate.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -17,31 +22,26 @@ public class Holding implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Holding")
 	@SequenceGenerator(name = "seq_Holding", sequenceName = "s_Holding", allocationSize = 1)
-	private Long id;
-	@Column(length = 20, nullable = false, unique = true)
-	private String codigo;
-	@Column(length = 50, nullable = false)
+	private Long codigo;
+	@Column(length = 100, nullable = false)
 	private String nome;
+	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
+	@JoinColumn(name="holding", foreignKey = @ForeignKey(name = "fk_empresa_holding"))
+	private List<Empresa> empresas;
 
 	public Holding() {
 		super();
 	}
-	public Holding(String codigo, String nome) {
+	public Holding(String nome, List<Empresa> empresas) {
 		super();
-		this.codigo = codigo;
 		this.nome = nome;
+		this.empresas = empresas;
 	}
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 	public String getNome() {
@@ -50,20 +50,28 @@ public class Holding implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	public List<Empresa> getEmpresas() {
+		return empresas;
+	}
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
 	
 	@Override
 	public String toString() {
-		return "Holding [id=" + id + ", codigo=" + codigo + ", nome=" + nome + "]";
+		return "Holding [codigo=" + codigo + ", nome=" + nome + ", empresas=" + empresas + "]";
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((empresas == null) ? 0 : empresas.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -78,10 +86,10 @@ public class Holding implements Serializable {
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (empresas == null) {
+			if (other.empresas != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!empresas.equals(other.empresas))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
