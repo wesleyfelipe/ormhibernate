@@ -11,6 +11,7 @@ import com.unisinos.bancodedados2.ga.ormhibernate.model.Categoria;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Cor;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Departamento;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
+import com.unisinos.bancodedados2.ga.ormhibernate.model.Grade;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.GradeItem;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Holding;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Loja;
@@ -69,15 +70,17 @@ public class GerenciadorBaseDeDados {
 		Holding holding = new Holding("Teste Holding",empresas);
 		GradeItem gradeItem = new GradeItem("Item 1", cor, tamanho);
 		
+		ArrayList<GradeItem> itensGrade = new ArrayList<GradeItem>();
+		itensGrade.add(gradeItem);
 		
-		
+		Grade grade = new Grade("Grade Teste", itensGrade);
 		
 		
 		System.out.println("Iniciando transação.");
 		em.getTransaction().begin();
 		
-		System.out.println("Gravando um registro: gradeItem");
-		em.persist(gradeItem);
+		System.out.println("Gravando um registro: grade");
+		em.persist(grade);
 		
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();
