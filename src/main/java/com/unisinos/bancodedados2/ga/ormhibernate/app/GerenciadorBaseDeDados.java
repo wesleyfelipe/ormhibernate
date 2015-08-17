@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Cor;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Departamento;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
+import com.unisinos.bancodedados2.ga.ormhibernate.model.Grade;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Holding;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Loja;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Secao;
@@ -29,6 +30,7 @@ public class GerenciadorBaseDeDados {
 		Cor cor = new Cor("AA1","Azul celeste");
 		Departamento departamento = new Departamento("DP2","Compras");
 		Secao secao = new Secao("SSA","Secao 1", departamento);
+		Grade grade = new Grade("GR1","Grade 1");
 		
 		System.out.println("Iniciando transação.");
 		em.getTransaction().begin();
@@ -42,11 +44,13 @@ public class GerenciadorBaseDeDados {
 		System.out.println("Gravando um registro: tamanho");
 		em.persist(tamanho);
 		System.out.println("Gravando um registro: cor");
-		em.persist(cor);*/
+		em.persist(cor);
 		System.out.println("Gravando um registro: departamento");
 		em.persist(departamento);
 		System.out.println("Gravando um registro: secao");
-		em.persist(secao);
+		em.persist(secao);*/
+		System.out.println("Gravando um registro: grade");
+		em.persist(grade);
 				
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();
