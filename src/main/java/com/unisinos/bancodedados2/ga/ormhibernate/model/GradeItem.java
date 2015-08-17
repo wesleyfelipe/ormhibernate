@@ -14,35 +14,32 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-public class Produto implements Serializable{
+public class GradeItem implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Produto")
-	@SequenceGenerator(name = "seq_Produto", sequenceName = "s_Produto", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Gradeitem")
+	@SequenceGenerator(name = "seq_Gradeitem", sequenceName = "s_Gradeitem", allocationSize = 1)
 	private Long codigo;
-	@Column(length = 100, nullable = false)
+	@Column(length = 150, nullable = false)
 	private String nome;
 	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
-	@JoinColumn(name = "categoria", foreignKey = @ForeignKey(name = "fk_produto_categoria"))
-	private Categoria categoria;
-	@Column
-	private int estoqueAtual;
-	@Column
-	private int estoqueMinimo;
+	@JoinColumn(name = "cor", foreignKey = @ForeignKey(name = "fk_gradeitem_cor"))
+	private Cor cor;
+	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
+	@JoinColumn(name = "tamanho", foreignKey = @ForeignKey(name = "fk_gradeitem_cor"))
+	private Tamanho tamanho;
 	
-	public Produto(){
+	public GradeItem(){
 		super();
 	}
-	public Produto(String nome, Categoria categoria, int estoqueAtual, int estoqueMinimo) {
+	public GradeItem(String nome, Cor cor, Tamanho tamanho) {
 		super();
 		this.nome = nome;
-		this.categoria = categoria;
-		this.estoqueAtual = estoqueAtual;
-		this.estoqueMinimo = estoqueMinimo;
+		this.cor = cor;
+		this.tamanho = tamanho;
 	}
-	
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -55,40 +52,32 @@ public class Produto implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Categoria getCategoria() {
-		return categoria;
+	public Cor getCor() {
+		return cor;
 	}
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setCor(Cor cor) {
+		this.cor = cor;
 	}
-	public int getEstoqueAtual() {
-		return estoqueAtual;
+	public Tamanho getTamanho() {
+		return tamanho;
 	}
-	public void setEstoqueAtual(int estoqueAtual) {
-		this.estoqueAtual = estoqueAtual;
-	}
-	public int getEstoqueMinimo() {
-		return estoqueMinimo;
-	}
-	public void setEstoqueMinimo(int estoqueMinimo) {
-		this.estoqueMinimo = estoqueMinimo;
+	public void setTamanho(Tamanho tamanho) {
+		this.tamanho = tamanho;
 	}
 	
 	@Override
 	public String toString() {
-		return "Produto [codigo=" + codigo + ", nome=" + nome + ", categoria=" + categoria + ", estoqueAtual="
-				+ estoqueAtual + ", estoqueMinimo=" + estoqueMinimo + "]";
+		return "GradeItem [codigo=" + codigo + ", nome=" + nome + ", cor=" + cor + ", tamanho=" + tamanho + "]";
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + estoqueAtual;
-		result = prime * result + estoqueMinimo;
+		result = prime * result + ((cor == null) ? 0 : cor.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((tamanho == null) ? 0 : tamanho.hashCode());
 		return result;
 	}
 	
@@ -100,25 +89,26 @@ public class Produto implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produto other = (Produto) obj;
-		if (categoria == null) {
-			if (other.categoria != null)
-				return false;
-		} else if (!categoria.equals(other.categoria))
-			return false;
+		GradeItem other = (GradeItem) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
 		} else if (!codigo.equals(other.codigo))
 			return false;
-		if (estoqueAtual != other.estoqueAtual)
-			return false;
-		if (estoqueMinimo != other.estoqueMinimo)
+		if (cor == null) {
+			if (other.cor != null)
+				return false;
+		} else if (!cor.equals(other.cor))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
+			return false;
+		if (tamanho == null) {
+			if (other.tamanho != null)
+				return false;
+		} else if (!tamanho.equals(other.tamanho))
 			return false;
 		return true;
 	}	
