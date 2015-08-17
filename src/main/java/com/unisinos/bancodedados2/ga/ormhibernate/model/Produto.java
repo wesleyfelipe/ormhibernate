@@ -4,30 +4,38 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-public class Cor implements Serializable {
+public class Produto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Cor")
-	@SequenceGenerator(name = "seq_Cor", sequenceName = "s_Cor", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Produto")
+	@SequenceGenerator(name = "seq_Produto", sequenceName = "s_Produto", allocationSize = 1)
 	private Long codigo;
-	@Column(length = 50, nullable = false)
+	@Column(length = 100, nullable = false)
 	private String nome;
-
-	public Cor() {
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "categoria", foreignKey = @ForeignKey(name = "fk_produto_categoria"))
+	private Categoria categoria;
+	
+	public Produto(){
 		super();
 	}
-	public Cor(String nome) {
+	public Produto(String nome, Categoria categoria) {
 		super();
 		this.nome = nome;
+		this.categoria = categoria;
 	}
+
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -40,21 +48,28 @@ public class Cor implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
 	@Override
 	public String toString() {
-		return "Cor [codigo=" + codigo + ", nome=" + nome + "]";
+		return "Produto [codigo=" + codigo + ", nome=" + nome + ", categoria=" + categoria + "]";
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -63,7 +78,12 @@ public class Cor implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cor other = (Cor) obj;
+		Produto other = (Produto) obj;
+		if (categoria == null) {
+			if (other.categoria != null)
+				return false;
+		} else if (!categoria.equals(other.categoria))
+			return false;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
@@ -75,5 +95,5 @@ public class Cor implements Serializable {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
-	}
+	}	
 }

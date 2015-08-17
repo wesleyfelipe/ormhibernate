@@ -1,5 +1,6 @@
 package com.unisinos.bancodedados2.ga.ormhibernate.app;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -9,11 +10,8 @@ import javax.persistence.Persistence;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Categoria;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Cor;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Departamento;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Grade;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Holding;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Loja;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.LojaDepartamento;
+import com.unisinos.bancodedados2.ga.ormhibernate.model.Produto;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Secao;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Tamanho;
 
@@ -25,7 +23,7 @@ public class GerenciadorBaseDeDados {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("BD2");
 		EntityManager em = emf.createEntityManager();
 
-		Holding holding = new Holding("hteste6","Holding Teste 6");
+		/*Holding holding = new Holding("hteste6","Holding Teste 6");
 		Empresa empresa = new Empresa("emp5","Empresa teste 5","Empresa","Rua Teste", holding);
 		Loja loja = new Loja("lojateste3",empresa,"Loja Teste 3",new Date(),12);
 		Tamanho tamanho = new Tamanho("XGG","Extra grande x2");
@@ -34,35 +32,41 @@ public class GerenciadorBaseDeDados {
 		Secao secao = new Secao("SSA3","Secao 2", departamento);
 		Grade grade = new Grade("GR2","Grade 2");
 		Categoria categoria = new Categoria("CAT2","Categoria 2",secao);
-		LojaDepartamento lojaDepartamento = new LojaDepartamento(loja,departamento);
+		LojaDepartamento lojaDepartamento = new LojaDepartamento(loja,departamento);*/
+		
+		Tamanho tamanho = new Tamanho("33");
+		Cor cor = new Cor("Azul");
+		Categoria categoria = new Categoria("Categoria 1");
+		Produto produto = new Produto("Produto 1", categoria);
+		
+		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+		categorias.add(categoria);
+		
+		Secao secao = new Secao("Secao 1",categorias);
+		Secao secao2 = new Secao("Secao 2",categorias);
+		
+		ArrayList<Secao> secoes = new ArrayList<Secao>();
+		secoes.add(secao);
+		secoes.add(secao2);
+		Departamento departamento = new Departamento("Feminino",secoes);
+		
+		ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
+		departamentos.add(departamento);
+		
+		Loja loja = new Loja("Teste", new Date(), 10, departamentos);
+		
+		
 		
 		System.out.println("Iniciando transação.");
 		em.getTransaction().begin();
 		
-		System.out.println("Gravando um registro: holding");
-		em.persist(holding);
-		System.out.println("Gravando um registro: empresa");
-		em.persist(empresa);
 		System.out.println("Gravando um registro: loja");
 		em.persist(loja);
-		System.out.println("Gravando um registro: tamanho");
-		em.persist(tamanho);
-		System.out.println("Gravando um registro: cor");
-		em.persist(cor);
-		System.out.println("Gravando um registro: departamento");
-		em.persist(departamento);
-		System.out.println("Gravando um registro: secao");
-		em.persist(secao);
-		System.out.println("Gravando um registro: grade");
-		em.persist(grade);
-		System.out.println("Gravando um registro: categoria");
-		em.persist(categoria);
-		System.out.println("Gravando um registro: lojaDepartamento");
-		em.persist(lojaDepartamento);
 		
-				
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();
+		em.close();
+		emf.close();
 	}
 
 }

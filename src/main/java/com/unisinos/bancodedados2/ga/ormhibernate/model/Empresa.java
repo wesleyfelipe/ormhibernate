@@ -29,7 +29,7 @@ public class Empresa implements Serializable {
 	private String fantasia;
 	@Column(length = 150, nullable = false)
 	private String logradouro;
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "holding", foreignKey = @ForeignKey(name = "fk_empresa_holding"))
 	private Holding holding;
 	

@@ -17,31 +17,22 @@ public class Tamanho implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Tamanho")
 	@SequenceGenerator(name = "seq_Tamanho", sequenceName = "s_Tamanho", allocationSize = 1)
-	private Long id;
-	@Column(length = 20, nullable = false, unique = true)
-	private String codigo;
+	private Long codigo;
 	@Column(length = 50, nullable = false)
 	private String nome;
 	
 	public Tamanho(){
 		super();
 	}
-	public Tamanho(String codigo, String nome) {
+	public Tamanho(String nome) {
 		super();
-		this.codigo = codigo;
 		this.nome = nome;
 	}
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 	public String getNome() {
@@ -53,7 +44,7 @@ public class Tamanho implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Tamanho [id=" + id + ", codigo=" + codigo + ", nome=" + nome + "]";
+		return "Tamanho [codigo=" + codigo + ", nome=" + nome + "]";
 	}
 	
 	@Override
@@ -61,7 +52,6 @@ public class Tamanho implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -79,11 +69,6 @@ public class Tamanho implements Serializable{
 			if (other.codigo != null)
 				return false;
 		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)

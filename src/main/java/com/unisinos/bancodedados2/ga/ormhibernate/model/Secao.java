@@ -1,7 +1,9 @@
 package com.unisinos.bancodedados2.ga.ormhibernate.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -9,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -20,35 +22,26 @@ public class Secao implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Secao")
 	@SequenceGenerator(name = "seq_Secao", sequenceName = "s_Secao", allocationSize = 1)
-	private Long id;
-	@Column(length = 20, nullable = false, unique = true)
-	private String codigo;
+	private Long codigo;
 	@Column(length = 50, nullable = false)
 	private String nome;
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "departamento", foreignKey = @ForeignKey(name = "fk_secao_departamento"))
-	private Departamento departamento;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="secao", foreignKey = @ForeignKey(name = "fk_categoria_secao"), nullable=false)
+	private List<Categoria> categorias;
 	
 	public Secao(){
 		super();
 	}
-	public Secao(String codigo, String nome, Departamento departamento) {
+	public Secao(String nome, List<Categoria> categorias) {
 		super();
-		this.codigo = codigo;
 		this.nome = nome;
-		this.departamento = departamento;
+		this.categorias = categorias;
 	}
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getCodigo() {
+
+	public Long getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 	public String getNome() {
@@ -57,29 +50,25 @@ public class Secao implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Departamento getDepartamento() {
-		return departamento;
+	public List<Categoria> getCategorias() {
+		return categorias;
 	}
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
-	
 	@Override
 	public String toString() {
-		return "Secao [id=" + id + ", codigo=" + codigo + ", nome=" + nome + ", departamento=" + departamento + "]";
+		return "Secao [codigo=" + codigo + ", nome=" + nome + ", categorias=" + categorias + "]";
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((categorias == null) ? 0 : categorias.hashCode());
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((departamento == null) ? 0 : departamento.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -89,20 +78,15 @@ public class Secao implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Secao other = (Secao) obj;
+		if (categorias == null) {
+			if (other.categorias != null)
+				return false;
+		} else if (!categorias.equals(other.categorias))
+			return false;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
 		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (departamento == null) {
-			if (other.departamento != null)
-				return false;
-		} else if (!departamento.equals(other.departamento))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
