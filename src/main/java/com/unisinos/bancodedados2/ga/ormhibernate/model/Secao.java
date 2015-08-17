@@ -25,6 +25,7 @@ public class Secao implements Serializable{
 	private Long codigo;
 	@Column(length = 50, nullable = false)
 	private String nome;
+	//TODO: Nome da restrição foreign key não esta sendo utilizada no banco
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="secao", foreignKey = @ForeignKey(name = "fk_categoria_secao"), nullable=false)
 	private List<Categoria> categorias;

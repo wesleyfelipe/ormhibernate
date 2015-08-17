@@ -12,9 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -33,16 +35,22 @@ public class Loja implements Serializable {
 	private Date dataAbertura;
 	@Column
 	private int totalFuncionarios;
-	@OneToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name = "LojaDepartamento",
             joinColumns = @JoinColumn(name = "codigoloja", referencedColumnName="codigo"),
-            inverseJoinColumns = @JoinColumn(name = "codigodepartamento",  referencedColumnName="codigo"))
+            inverseJoinColumns = @JoinColumn(name = "codigodepartamento",  referencedColumnName="codigo"),
+            uniqueConstraints = @UniqueConstraint(columnNames={"codigoloja","codigodepartamento"}, name="uc_lojadepartamento_loja_departamento"))
+	@SequenceGenerator(name = "seq_LojaDepartamento", sequenceName = "s_LojaDepartamento", allocationSize = 1)
+	@CollectionId(
+	        columns = @Column(name="codigo"), 
+	        type=@Type(type="long"), 
+	        generator = "seq_LojaDepartamento"
+	    )
 	private List<Departamento> departamentos;
 	
 	public Loja() {
 		super();
 	}
-
 	public Loja(String nome, Date dataAbertura, int totalFuncionarios, List<Departamento> departamentos) {
 		super();
 		this.nome = nome;
@@ -54,43 +62,33 @@ public class Loja implements Serializable {
 	public Long getCodigo() {
 		return codigo;
 	}
-
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public Date getDataAbertura() {
 		return dataAbertura;
 	}
-
 	public void setDataAbertura(Date dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
-
 	public int getTotalFuncionarios() {
 		return totalFuncionarios;
 	}
-
 	public void setTotalFuncionarios(int totalFuncionarios) {
 		this.totalFuncionarios = totalFuncionarios;
 	}
-
 	public List<Departamento> getDepartamentos() {
 		return departamentos;
 	}
-
 	public void setDepartamentos(List<Departamento> departamentos) {
 		this.departamentos = departamentos;
 	}
-	
 
 	@Override
 	public String toString() {
@@ -143,5 +141,4 @@ public class Loja implements Serializable {
 			return false;
 		return true;
 	}
-	
 }
