@@ -7,12 +7,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.UniqueConstraint;
 
@@ -47,16 +49,21 @@ public class Loja implements Serializable {
 	        generator = "seq_LojaDepartamento"
 	    )
 	private List<Departamento> departamentos;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="loja", foreignKey = @ForeignKey(name = "fk_estoquegradeitem_loja"))
+	private List<EstoqueGradeItem> estoque;
 	
 	public Loja() {
 		super();
 	}
-	public Loja(String nome, Date dataAbertura, int totalFuncionarios, List<Departamento> departamentos) {
+	public Loja(String nome, Date dataAbertura, int totalFuncionarios, List<Departamento> departamentos,
+			List<EstoqueGradeItem> estoque) {
 		super();
 		this.nome = nome;
 		this.dataAbertura = dataAbertura;
 		this.totalFuncionarios = totalFuncionarios;
 		this.departamentos = departamentos;
+		this.estoque = estoque;
 	}
 
 	public Long getCodigo() {
@@ -89,25 +96,31 @@ public class Loja implements Serializable {
 	public void setDepartamentos(List<Departamento> departamentos) {
 		this.departamentos = departamentos;
 	}
-
+	public List<EstoqueGradeItem> getEstoque() {
+		return estoque;
+	}
+	public void setEstoque(List<EstoqueGradeItem> estoque) {
+		this.estoque = estoque;
+	}
+	
 	@Override
 	public String toString() {
 		return "Loja [codigo=" + codigo + ", nome=" + nome + ", dataAbertura=" + dataAbertura + ", totalFuncionarios="
-				+ totalFuncionarios + ", departamentos=" + departamentos + "]";
+				+ totalFuncionarios + ", departamentos=" + departamentos + ", estoque=" + estoque + "]";
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((dataAbertura == null) ? 0 : dataAbertura.hashCode());
 		result = prime * result + ((departamentos == null) ? 0 : departamentos.hashCode());
+		result = prime * result + ((estoque == null) ? 0 : estoque.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + totalFuncionarios;
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -117,11 +130,6 @@ public class Loja implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Loja other = (Loja) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
 		if (dataAbertura == null) {
 			if (other.dataAbertura != null)
 				return false;
@@ -131,6 +139,11 @@ public class Loja implements Serializable {
 			if (other.departamentos != null)
 				return false;
 		} else if (!departamentos.equals(other.departamentos))
+			return false;
+		if (estoque == null) {
+			if (other.estoque != null)
+				return false;
+		} else if (!estoque.equals(other.estoque))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)

@@ -11,6 +11,7 @@ import com.unisinos.bancodedados2.ga.ormhibernate.model.Categoria;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Cor;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Departamento;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
+import com.unisinos.bancodedados2.ga.ormhibernate.model.EstoqueGradeItem;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Grade;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.GradeItem;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Holding;
@@ -57,7 +58,7 @@ public class GerenciadorBaseDeDados {
 		ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
 		departamentos.add(departamento);
 		
-		Loja loja = new Loja("Teste", new Date(), 10, departamentos);
+		Loja loja = new Loja("Teste", new Date(), 10, departamentos, null);
 		
 		ArrayList<Loja> lojas = new ArrayList<Loja>();
 		lojas.add(loja);
@@ -75,12 +76,15 @@ public class GerenciadorBaseDeDados {
 		
 		Grade grade = new Grade("Grade Teste", itensGrade);
 		
+		EstoqueGradeItem itemEstoque = new EstoqueGradeItem(10,10,produto,gradeItem);
+		ArrayList<EstoqueGradeItem> estoque = new ArrayList<EstoqueGradeItem>();
+		loja.setEstoque(estoque);
 		
 		System.out.println("Iniciando transação.");
 		em.getTransaction().begin();
 		
 		System.out.println("Gravando um registro: grade");
-		em.persist(grade);
+		em.persist(loja);
 		
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();

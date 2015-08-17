@@ -27,9 +27,9 @@ public class Produto implements Serializable{
 	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinColumn(name = "categoria", foreignKey = @ForeignKey(name = "fk_produto_categoria"))
 	private Categoria categoria;
-	@Column
+	@Column( nullable = false )
 	private int estoqueAtual;
-	@Column
+	@Column( nullable = false)
 	private int estoqueMinimo;
 	
 	public Produto(){
