@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Categoria;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Cor;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Departamento;
+import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Loja;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Produto;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Secao;
@@ -55,13 +56,17 @@ public class GerenciadorBaseDeDados {
 		
 		Loja loja = new Loja("Teste", new Date(), 10, departamentos);
 		
+		ArrayList<Loja> lojas = new ArrayList<Loja>();
+		lojas.add(loja);
+		
+		Empresa empresa = new Empresa("Emp1","Empresa teste 1","Rua teste", lojas);
 		
 		
 		System.out.println("Iniciando transação.");
 		em.getTransaction().begin();
 		
-		System.out.println("Gravando um registro: loja");
-		em.persist(loja);
+		System.out.println("Gravando um registro: empresa");
+		em.persist(empresa);
 		
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();

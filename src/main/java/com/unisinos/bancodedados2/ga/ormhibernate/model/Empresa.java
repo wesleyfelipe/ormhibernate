@@ -1,7 +1,9 @@
 package com.unisinos.bancodedados2.ga.ormhibernate.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -9,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -20,41 +22,32 @@ public class Empresa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Empresa")
 	@SequenceGenerator(name = "seq_Empresa", sequenceName = "s_Empresa", allocationSize = 1)
-	private Long id;
-	@Column(length = 20, nullable = false, unique = true)
-	private String codigo;
+	private Long codigo;
 	@Column(length = 255, nullable = false)
 	private String razaoSocial;
 	@Column(length = 255, nullable = false)
 	private String fantasia;
 	@Column(length = 150, nullable = false)
 	private String logradouro;
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "holding", foreignKey = @ForeignKey(name = "fk_empresa_holding"))
-	private Holding holding;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="empresa", foreignKey = @ForeignKey(name = "fk_loja_empresa"), nullable=false)
+	private List<Loja> lojas;
 	
 	public Empresa() {
 		super();
 	}
-	public Empresa(String codigo, String razaoSocial, String fantasia, String logradouro, Holding holding) {
+	public Empresa(String razaoSocial, String fantasia, String logradouro, List<Loja> lojas) {
 		super();
-		this.codigo = codigo;
 		this.razaoSocial = razaoSocial;
 		this.fantasia = fantasia;
 		this.logradouro = logradouro;
-		this.holding = holding;
+		this.lojas = lojas;
 	}
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 	public String getRazaoSocial() {
@@ -75,30 +68,31 @@ public class Empresa implements Serializable {
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
-	public Holding getHolding() {
-		return holding;
+	public List<Loja> getLojas() {
+		return lojas;
 	}
-	public void setHolding(Holding holding) {
-		this.holding = holding;
+	public void setLojas(List<Loja> lojas) {
+		this.lojas = lojas;
 	}
 	
 	@Override
 	public String toString() {
-		return "Empresa [id=" + id + ", codigo=" + codigo + ", razaoSocial=" + razaoSocial + ", fantasia=" + fantasia
-				+ ", logradouro=" + logradouro + ", holding=" + holding + "]";
+		return "Empresa [codigo=" + codigo + ", razaoSocial=" + razaoSocial + ", fantasia=" + fantasia + ", logradouro="
+				+ logradouro + ", lojas=" + lojas + "]";
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((fantasia == null) ? 0 : fantasia.hashCode());
-		result = prime * result + ((holding == null) ? 0 : holding.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((logradouro == null) ? 0 : logradouro.hashCode());
+		result = prime * result + ((lojas == null) ? 0 : lojas.hashCode());
 		result = prime * result + ((razaoSocial == null) ? 0 : razaoSocial.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -118,20 +112,15 @@ public class Empresa implements Serializable {
 				return false;
 		} else if (!fantasia.equals(other.fantasia))
 			return false;
-		if (holding == null) {
-			if (other.holding != null)
-				return false;
-		} else if (!holding.equals(other.holding))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
 		if (logradouro == null) {
 			if (other.logradouro != null)
 				return false;
 		} else if (!logradouro.equals(other.logradouro))
+			return false;
+		if (lojas == null) {
+			if (other.lojas != null)
+				return false;
+		} else if (!lojas.equals(other.lojas))
 			return false;
 		if (razaoSocial == null) {
 			if (other.razaoSocial != null)
@@ -139,5 +128,5 @@ public class Empresa implements Serializable {
 		} else if (!razaoSocial.equals(other.razaoSocial))
 			return false;
 		return true;
-	}
+	}	
 }
