@@ -11,6 +11,7 @@ import com.unisinos.bancodedados2.ga.ormhibernate.model.Departamento;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Holding;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Loja;
+import com.unisinos.bancodedados2.ga.ormhibernate.model.Secao;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Tamanho;
 
 public class GerenciadorBaseDeDados {
@@ -26,7 +27,8 @@ public class GerenciadorBaseDeDados {
 		Loja loja = new Loja("lojateste",empresa,"Loja Teste",new Date(),12);
 		Tamanho tamanho = new Tamanho("XG","Extra grande");
 		Cor cor = new Cor("AA1","Azul celeste");
-		Departamento departamento = new Departamento("DP1","Vendas");
+		Departamento departamento = new Departamento("DP2","Compras");
+		Secao secao = new Secao("SSA","Secao 1", departamento);
 		
 		System.out.println("Iniciando transação.");
 		em.getTransaction().begin();
@@ -43,7 +45,8 @@ public class GerenciadorBaseDeDados {
 		em.persist(cor);*/
 		System.out.println("Gravando um registro: departamento");
 		em.persist(departamento);
-		
+		System.out.println("Gravando um registro: secao");
+		em.persist(secao);
 				
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();
