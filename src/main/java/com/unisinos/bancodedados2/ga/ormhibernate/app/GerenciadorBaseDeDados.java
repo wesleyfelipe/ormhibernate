@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.unisinos.bancodedados2.ga.ormhibernate.model.Categoria;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Cor;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Departamento;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
@@ -28,9 +29,10 @@ public class GerenciadorBaseDeDados {
 		Loja loja = new Loja("lojateste",empresa,"Loja Teste",new Date(),12);
 		Tamanho tamanho = new Tamanho("XG","Extra grande");
 		Cor cor = new Cor("AA1","Azul celeste");
-		Departamento departamento = new Departamento("DP2","Compras");
-		Secao secao = new Secao("SSA","Secao 1", departamento);
+		Departamento departamento = new Departamento("DP3","Compras 2");
+		Secao secao = new Secao("SSA2","Secao 1", departamento);
 		Grade grade = new Grade("GR1","Grade 1");
+		Categoria categoria = new Categoria("CAT1","Categoria 1",secao);
 		
 		System.out.println("Iniciando transação.");
 		em.getTransaction().begin();
@@ -44,13 +46,15 @@ public class GerenciadorBaseDeDados {
 		System.out.println("Gravando um registro: tamanho");
 		em.persist(tamanho);
 		System.out.println("Gravando um registro: cor");
-		em.persist(cor);
+		em.persist(cor);*/
 		System.out.println("Gravando um registro: departamento");
 		em.persist(departamento);
 		System.out.println("Gravando um registro: secao");
-		em.persist(secao);*/
-		System.out.println("Gravando um registro: grade");
-		em.persist(grade);
+		em.persist(secao);
+		/*System.out.println("Gravando um registro: grade");
+		em.persist(grade);*/
+		System.out.println("Gravando um registro: categoria");
+		em.persist(categoria);
 				
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();
