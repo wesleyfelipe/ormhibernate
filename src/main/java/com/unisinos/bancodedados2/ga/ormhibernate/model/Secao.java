@@ -1,11 +1,13 @@
 package com.unisinos.bancodedados2.ga.ormhibernate.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,9 +25,11 @@ public class Secao implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Secao")
 	@SequenceGenerator(name = "seq_Secao", sequenceName = "s_Secao", allocationSize = 1)
 	private Long codigo;
+	
 	@Column(length = 50, nullable = false)
 	private String nome;
-	@OneToMany(cascade=CascadeType.ALL)
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="secao", foreignKey = @ForeignKey(name = "fk_categoria_secao"), nullable=false)
 	private List<Categoria> categorias;
 	
@@ -36,6 +40,11 @@ public class Secao implements Serializable{
 		super();
 		this.nome = nome;
 		this.categorias = categorias;
+	}
+	public Secao(String nome) {
+		super();
+		this.nome = nome;
+		this.categorias = new ArrayList<Categoria>();
 	}
 
 	public Long getCodigo() {
@@ -56,6 +65,11 @@ public class Secao implements Serializable{
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
+	
+	public void addCategoria(Categoria categoria){
+		this.categorias.add(categoria);
+	}
+	
 	@Override
 	public String toString() {
 		return "Secao [codigo=" + codigo + ", nome=" + nome + ", categorias=" + categorias + "]";

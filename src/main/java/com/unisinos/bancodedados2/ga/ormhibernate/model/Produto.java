@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,14 +23,18 @@ public class Produto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Produto")
 	@SequenceGenerator(name = "seq_Produto", sequenceName = "s_Produto", allocationSize = 1)
 	private Long codigo;
-	@Column(length = 100, nullable = false)
+	
+	@Column(length = 255, nullable = false)
 	private String nome;
-	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
+	
+	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "categoria", foreignKey = @ForeignKey(name = "fk_produto_categoria"))
 	private Categoria categoria;
-	@Column( nullable = false )
+	
+	@Column
 	private int estoqueAtual;
-	@Column( nullable = false)
+	
+	@Column
 	private int estoqueMinimo;
 	
 	public Produto(){

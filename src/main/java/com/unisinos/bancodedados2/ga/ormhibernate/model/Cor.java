@@ -18,6 +18,7 @@ public class Cor implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Cor")
 	@SequenceGenerator(name = "seq_Cor", sequenceName = "s_Cor", allocationSize = 1)
 	private Long codigo;
+	
 	@Column(length = 50, nullable = false)
 	private String nome;
 

@@ -18,6 +18,7 @@ public class Categoria implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Categoria")
 	@SequenceGenerator(name = "seq_Categoria", sequenceName = "s_Categoria", allocationSize = 1)
 	private Long codigo;
+	
 	@Column(length = 50, nullable = false)
 	private String nome;
 	
@@ -41,6 +42,7 @@ public class Categoria implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	@Override
 	public String toString() {
 		return "Categoria [codigo=" + codigo + ", nome=" + nome + "]";

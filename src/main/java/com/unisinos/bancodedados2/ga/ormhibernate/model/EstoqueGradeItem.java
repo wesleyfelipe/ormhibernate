@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,14 +26,18 @@ public class EstoqueGradeItem implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_EstoqueGradeItem")
 	@SequenceGenerator(name = "seq_EstoqueGradeItem", sequenceName = "s_EstoqueGradeItem", allocationSize = 1)
 	private Long codigo;
-	@Column( nullable = false )
+	
+	@Column
 	private int estoqueAtual;
-	@Column( nullable = false)
+	
+	@Column
 	private int estoqueMinimo;
-	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
+	
+	@ManyToOne(cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "produto", foreignKey = @ForeignKey(name = "fk_produto_estoqueGradeItem"))
 	private Produto produto;
-	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
+	
+	@ManyToOne(cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "gradeItem", foreignKey = @ForeignKey(name = "fk_estoqueGradeItem_gradeitem"))
 	private GradeItem gradeItem;
 	

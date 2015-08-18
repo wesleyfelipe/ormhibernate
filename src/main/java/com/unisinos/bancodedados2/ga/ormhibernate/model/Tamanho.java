@@ -18,6 +18,7 @@ public class Tamanho implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Tamanho")
 	@SequenceGenerator(name = "seq_Tamanho", sequenceName = "s_Tamanho", allocationSize = 1)
 	private Long codigo;
+	
 	@Column(length = 50, nullable = false)
 	private String nome;
 	

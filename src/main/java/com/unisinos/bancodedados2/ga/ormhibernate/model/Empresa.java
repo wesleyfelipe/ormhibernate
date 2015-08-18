@@ -1,11 +1,13 @@
 package com.unisinos.bancodedados2.ga.ormhibernate.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,13 +25,17 @@ public class Empresa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Empresa")
 	@SequenceGenerator(name = "seq_Empresa", sequenceName = "s_Empresa", allocationSize = 1)
 	private Long codigo;
+	
 	@Column(length = 255, nullable = false)
 	private String razaoSocial;
+	
 	@Column(length = 255, nullable = false)
 	private String fantasia;
-	@Column(length = 150, nullable = false)
+	
+	@Column(length = 255, nullable = false)
 	private String logradouro;
-	@OneToMany(cascade=CascadeType.ALL)
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="empresa", foreignKey = @ForeignKey(name = "fk_loja_empresa"), nullable=false)
 	private List<Loja> lojas;
 	
@@ -42,6 +48,13 @@ public class Empresa implements Serializable {
 		this.fantasia = fantasia;
 		this.logradouro = logradouro;
 		this.lojas = lojas;
+	}
+	public Empresa(String razaoSocial, String fantasia, String logradouro) {
+		super();
+		this.razaoSocial = razaoSocial;
+		this.fantasia = fantasia;
+		this.logradouro = logradouro;
+		this.lojas = new ArrayList<Loja>();
 	}
 	
 	public Long getCodigo() {
@@ -73,6 +86,10 @@ public class Empresa implements Serializable {
 	}
 	public void setLojas(List<Loja> lojas) {
 		this.lojas = lojas;
+	}
+	
+	public void addLoja(Loja loja){
+		this.lojas.add(loja);
 	}
 	
 	@Override

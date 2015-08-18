@@ -1,11 +1,13 @@
 package com.unisinos.bancodedados2.ga.ormhibernate.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,10 +25,14 @@ public class Grade implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Grade")
 	@SequenceGenerator(name = "seq_Grade", sequenceName = "s_Grade", allocationSize = 1)
 	private Long codigo;
+	
 	@Column(length = 100, nullable = false)
 	private String nome;
-	@OneToMany(cascade={CascadeType.ALL})
-	@JoinColumn(name="grade", foreignKey = @ForeignKey(name = "fk_gradeitem_grade"), nullable = false)
+	
+	
+	//TODO: Adicionar not null constraint na chave estrangeira
+	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
+	@JoinColumn(name="grade", foreignKey = @ForeignKey(name = "fk_gradeitem_grade"))
 	private List<GradeItem> itens;
 	
 	public Grade(){
@@ -36,6 +42,11 @@ public class Grade implements Serializable{
 		super();
 		this.nome = nome;
 		this.itens = itens;
+	}
+	public Grade(String nome){
+		super();
+		this.nome = nome;
+		this.itens = new ArrayList<GradeItem>();
 	}
 	
 	public Long getCodigo() {
@@ -55,6 +66,10 @@ public class Grade implements Serializable{
 	}
 	public void setItens(List<GradeItem> itens) {
 		this.itens = itens;
+	}
+	
+	public void addItem(GradeItem item){
+		this.itens.add(item);
 	}
 	
 	@Override

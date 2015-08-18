@@ -1,11 +1,13 @@
 package com.unisinos.bancodedados2.ga.ormhibernate.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,10 +26,11 @@ public class Departamento implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Departamento")
 	@SequenceGenerator(name = "seq_Departamento", sequenceName = "s_Departamento", allocationSize = 1)
 	private Long codigo;
+	
 	@Column(length = 50, nullable = false)
 	private String nome;
-	//TODO: Nome da restrição foreign key não esta sendo utilizada no banco
-	@OneToMany(cascade=CascadeType.ALL)
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="departamento", foreignKey = @ForeignKey(name = "fk_secao_departamento"), nullable=false)
 	private List<Secao> secoes;
 	
@@ -38,6 +41,11 @@ public class Departamento implements Serializable{
 		super();
 		this.nome = nome;
 		this.secoes = secoes;
+	}
+	public Departamento(String nome){
+		super();
+		this.nome = nome;
+		this.secoes = new ArrayList<Secao>();
 	}
 	
 	public Long getCodigo() {
@@ -57,6 +65,10 @@ public class Departamento implements Serializable{
 	}
 	public void setSecoes(List<Secao> secoes) {
 		this.secoes = secoes;
+	}
+	
+	public void addSecao(Secao secao){
+		this.secoes.add(secao);
 	}
 	
 	@Override

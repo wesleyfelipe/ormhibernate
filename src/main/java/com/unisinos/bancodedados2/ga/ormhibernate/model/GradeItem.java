@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,12 +23,15 @@ public class GradeItem implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Gradeitem")
 	@SequenceGenerator(name = "seq_Gradeitem", sequenceName = "s_Gradeitem", allocationSize = 1)
 	private Long codigo;
-	@Column(length = 150, nullable = false)
+	
+	@Column(length = 255, nullable = false)
 	private String nome;
-	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
+	
+	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "cor", foreignKey = @ForeignKey(name = "fk_gradeitem_cor"))
 	private Cor cor;
-	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
+	
+	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "tamanho", foreignKey = @ForeignKey(name = "fk_gradeitem_cor"))
 	private Tamanho tamanho;
 	

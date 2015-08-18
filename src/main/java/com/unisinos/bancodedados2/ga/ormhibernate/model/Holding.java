@@ -1,11 +1,13 @@
 package com.unisinos.bancodedados2.ga.ormhibernate.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,9 +25,11 @@ public class Holding implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Holding")
 	@SequenceGenerator(name = "seq_Holding", sequenceName = "s_Holding", allocationSize = 1)
 	private Long codigo;
-	@Column(length = 100, nullable = false)
+	
+	@Column(length = 255, nullable = false)
 	private String nome;
-	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
+	
+	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinColumn(name="holding", foreignKey = @ForeignKey(name = "fk_empresa_holding"))
 	private List<Empresa> empresas;
 
@@ -36,6 +40,11 @@ public class Holding implements Serializable {
 		super();
 		this.nome = nome;
 		this.empresas = empresas;
+	}
+	public Holding(String nome){
+		super();
+		this.nome = nome;
+		this.empresas = new ArrayList<Empresa>();
 	}
 	
 	public Long getCodigo() {
@@ -55,6 +64,10 @@ public class Holding implements Serializable {
 	}
 	public void setEmpresas(List<Empresa> empresas) {
 		this.empresas = empresas;
+	}
+	
+	public void addEmpresa(Empresa empresa){
+		empresas.add(empresa);
 	}
 	
 	@Override

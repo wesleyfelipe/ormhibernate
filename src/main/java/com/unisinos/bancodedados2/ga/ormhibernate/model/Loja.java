@@ -1,12 +1,14 @@
 package com.unisinos.bancodedados2.ga.ormhibernate.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,14 +32,18 @@ public class Loja implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_Loja")
 	@SequenceGenerator(name = "seq_Loja", sequenceName = "s_Loja", allocationSize = 1)
 	private Long codigo;
+	
 	@Column(length = 255, nullable = false)
 	private String nome;
+	
 	@Column
 	@Type(type="date")
 	private Date dataAbertura;
+	
 	@Column
 	private int totalFuncionarios;
-	@ManyToMany(cascade=CascadeType.ALL)
+	
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "LojaDepartamento",
             joinColumns = @JoinColumn(name = "codigoloja", referencedColumnName="codigo"),
             inverseJoinColumns = @JoinColumn(name = "codigodepartamento",  referencedColumnName="codigo"),
@@ -49,6 +55,7 @@ public class Loja implements Serializable {
 	        generator = "seq_LojaDepartamento"
 	    )
 	private List<Departamento> departamentos;
+	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="loja", foreignKey = @ForeignKey(name = "fk_estoquegradeitem_loja"), nullable=false)
 	private List<EstoqueGradeItem> estoque;
@@ -64,6 +71,14 @@ public class Loja implements Serializable {
 		this.totalFuncionarios = totalFuncionarios;
 		this.departamentos = departamentos;
 		this.estoque = estoque;
+	}
+	public Loja(String nome, Date dataAbertura, int totalFuncionarios) {
+		super();
+		this.nome = nome;
+		this.dataAbertura = dataAbertura;
+		this.totalFuncionarios = totalFuncionarios;
+		this.departamentos = new ArrayList<Departamento>();
+		this.estoque = new ArrayList<EstoqueGradeItem>();
 	}
 
 	public Long getCodigo() {
@@ -101,6 +116,14 @@ public class Loja implements Serializable {
 	}
 	public void setEstoque(List<EstoqueGradeItem> estoque) {
 		this.estoque = estoque;
+	}
+	
+	public void addEstoqueGradeItem(EstoqueGradeItem estoqueGradeItem){
+		this.estoque.add(estoqueGradeItem);
+	}
+	
+	public void addDepartamento(Departamento departamento){
+		this.departamentos.add(departamento);
 	}
 	
 	@Override
