@@ -26,7 +26,7 @@ public class Grade implements Serializable{
 	@Column(length = 100, nullable = false)
 	private String nome;
 	@OneToMany(cascade={CascadeType.ALL})
-	@JoinColumn(name="grade", foreignKey = @ForeignKey(name = "fk_gradeitem_grade"))
+	@JoinColumn(name="grade", foreignKey = @ForeignKey(name = "fk_gradeitem_grade"), nullable = false)
 	private List<GradeItem> itens;
 	
 	public Grade(){

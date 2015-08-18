@@ -12,6 +12,7 @@ import com.unisinos.bancodedados2.ga.ormhibernate.model.Cor;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Departamento;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.EstoqueGradeItem;
+import com.unisinos.bancodedados2.ga.ormhibernate.model.Grade;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.GradeItem;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Loja;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Produto;
@@ -44,6 +45,12 @@ public class GerenciadorBaseDeDados {
 		GradeItem gradeItem1 = new GradeItem("Teste Grade Item",new Cor("Azul"), new Tamanho("34"));
 		GradeItem gradeItem2 = new GradeItem("Teste Grade Item 2",new Cor("Verde"), new Tamanho("35"));
 		
+		ArrayList<GradeItem> itens = new ArrayList<GradeItem>();
+		itens.add(gradeItem1);
+		itens.add(gradeItem2);
+		
+		Grade grade = new Grade("Grade teste", itens);
+		
 		EstoqueGradeItem egitem1 = new EstoqueGradeItem(10,10,produto1,gradeItem1);
 		EstoqueGradeItem egitem2 = new EstoqueGradeItem(10,10,produto2,gradeItem2);
 		
@@ -62,6 +69,7 @@ public class GerenciadorBaseDeDados {
 		em.getTransaction().begin();
 		
 		System.out.println("Gravando um registro: empresa");
+		em.persist(grade);
 		em.persist(departamento);
 		em.persist(empresa);
 		
