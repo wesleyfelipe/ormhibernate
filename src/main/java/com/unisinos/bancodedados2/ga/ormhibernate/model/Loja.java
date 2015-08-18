@@ -50,7 +50,7 @@ public class Loja implements Serializable {
 	    )
 	private List<Departamento> departamentos;
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="loja", foreignKey = @ForeignKey(name = "fk_estoquegradeitem_loja"))
+	@JoinColumn(name="loja", foreignKey = @ForeignKey(name = "fk_estoquegradeitem_loja"), nullable=false)
 	private List<EstoqueGradeItem> estoque;
 	
 	public Loja() {

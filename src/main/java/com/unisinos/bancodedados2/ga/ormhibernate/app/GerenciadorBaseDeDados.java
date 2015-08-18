@@ -12,9 +12,7 @@ import com.unisinos.bancodedados2.ga.ormhibernate.model.Cor;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Departamento;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.EstoqueGradeItem;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Grade;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.GradeItem;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Holding;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Loja;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Produto;
 import com.unisinos.bancodedados2.ga.ormhibernate.model.Secao;
@@ -27,64 +25,45 @@ public class GerenciadorBaseDeDados {
 		System.out.println("Iniciando conexão com base de dados.");
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("BD2");
 		EntityManager em = emf.createEntityManager();
-
-		/*Holding holding = new Holding("hteste6","Holding Teste 6");
-		Empresa empresa = new Empresa("emp5","Empresa teste 5","Empresa","Rua Teste", holding);
-		Loja loja = new Loja("lojateste3",empresa,"Loja Teste 3",new Date(),12);
-		Tamanho tamanho = new Tamanho("XGG","Extra grande x2");
-		Cor cor = new Cor("AA2","Azul");
-		Departamento departamento = new Departamento("DP4","Logistica");
-		Secao secao = new Secao("SSA3","Secao 2", departamento);
-		Grade grade = new Grade("GR2","Grade 2");
-		Categoria categoria = new Categoria("CAT2","Categoria 2",secao);
-		LojaDepartamento lojaDepartamento = new LojaDepartamento(loja,departamento);*/
 		
-		Tamanho tamanho = new Tamanho("33");
-		Cor cor = new Cor("Azul");
-		Categoria categoria = new Categoria("Categoria 1");
-		Produto produto = new Produto("Produto 1", categoria, 10, 5);
+		Categoria categoria = new Categoria("Categoria Teste");
 		
 		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
 		categorias.add(categoria);
 		
-		Secao secao = new Secao("Secao 1",categorias);
-		Secao secao2 = new Secao("Secao 2",categorias);
+		Secao secao = new Secao("Seção 1", categorias);
 		
 		ArrayList<Secao> secoes = new ArrayList<Secao>();
 		secoes.add(secao);
-		secoes.add(secao2);
-		Departamento departamento = new Departamento("Feminino",secoes);
 		
-		ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
-		departamentos.add(departamento);
+		Departamento departamento = new Departamento("Departamento Teste 1", secoes);
 		
-		Loja loja = new Loja("Teste", new Date(), 10, departamentos, null);
+		Produto produto1 = new Produto("Produto Teste 1",categoria,12,2);
+		Produto produto2 = new Produto("Produto Teste 2",categoria,12,2);
+		
+		GradeItem gradeItem1 = new GradeItem("Teste Grade Item",new Cor("Azul"), new Tamanho("34"));
+		GradeItem gradeItem2 = new GradeItem("Teste Grade Item 2",new Cor("Verde"), new Tamanho("35"));
+		
+		EstoqueGradeItem egitem1 = new EstoqueGradeItem(10,10,produto1,gradeItem1);
+		EstoqueGradeItem egitem2 = new EstoqueGradeItem(10,10,produto2,gradeItem2);
+		
+		ArrayList<EstoqueGradeItem> estoque = new ArrayList<EstoqueGradeItem>();
+		estoque.add(egitem1);
+		estoque.add(egitem2);
+		
+		Loja loja1 = new Loja("Loja teste 1", new Date(), 10, new ArrayList<Departamento>(), estoque);
 		
 		ArrayList<Loja> lojas = new ArrayList<Loja>();
-		lojas.add(loja);
+		lojas.add(loja1);
+		Empresa empresa = new Empresa("Teste Razão","Teste Fantasia","Rua teste", lojas);
 		
-		Empresa empresa = new Empresa("Emp1","Empresa teste 1","Rua teste", lojas);
-		
-		ArrayList<Empresa> empresas = new ArrayList<Empresa>();
-		empresas.add(empresa);
-		
-		Holding holding = new Holding("Teste Holding",empresas);
-		GradeItem gradeItem = new GradeItem("Item 1", cor, tamanho);
-		
-		ArrayList<GradeItem> itensGrade = new ArrayList<GradeItem>();
-		itensGrade.add(gradeItem);
-		
-		Grade grade = new Grade("Grade Teste", itensGrade);
-		
-		EstoqueGradeItem itemEstoque = new EstoqueGradeItem(10,10,produto,gradeItem);
-		ArrayList<EstoqueGradeItem> estoque = new ArrayList<EstoqueGradeItem>();
-		loja.setEstoque(estoque);
 		
 		System.out.println("Iniciando transação.");
 		em.getTransaction().begin();
 		
-		System.out.println("Gravando um registro: grade");
-		em.persist(loja);
+		System.out.println("Gravando um registro: empresa");
+		em.persist(departamento);
+		em.persist(empresa);
 		
 		System.out.println("Comitando alterações.");
 		em.getTransaction().commit();
