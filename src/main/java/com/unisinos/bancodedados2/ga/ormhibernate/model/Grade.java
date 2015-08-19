@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,10 +28,9 @@ public class Grade implements Serializable{
 	@Column(length = 100, nullable = false)
 	private String nome;
 	
-	
-	//TODO: Adicionar not null constraint na chave estrangeira
-	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
-	@JoinColumn(name="grade", foreignKey = @ForeignKey(name = "fk_gradeitem_grade"))
+	//TODO: Nome da chave estrangeira não está sendo alterado no banco
+	@OneToMany(cascade={CascadeType.ALL})
+	@JoinColumn(name="grade", foreignKey = @ForeignKey(name = "fk_gradeitem_grade"), nullable = false)
 	private List<GradeItem> itens;
 	
 	public Grade(){

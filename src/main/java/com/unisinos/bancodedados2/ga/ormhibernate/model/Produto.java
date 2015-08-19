@@ -31,6 +31,10 @@ public class Produto implements Serializable{
 	@JoinColumn(name = "categoria", foreignKey = @ForeignKey(name = "fk_produto_categoria"))
 	private Categoria categoria;
 	
+	@ManyToOne(cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "grade", foreignKey = @ForeignKey(name = "fk_produto_grade"))
+	private Grade grade;
+	
 	@Column
 	private int estoqueAtual;
 	
@@ -77,12 +81,18 @@ public class Produto implements Serializable{
 	}
 	public void setEstoqueMinimo(int estoqueMinimo) {
 		this.estoqueMinimo = estoqueMinimo;
+	}	
+	public Grade getGrade() {
+		return grade;
+	}
+	public void setGrade(Grade grade) {
+		this.grade = grade;
 	}
 	
 	@Override
 	public String toString() {
-		return "Produto [codigo=" + codigo + ", nome=" + nome + ", categoria=" + categoria + ", estoqueAtual="
-				+ estoqueAtual + ", estoqueMinimo=" + estoqueMinimo + "]";
+		return "Produto [codigo=" + codigo + ", nome=" + nome + ", categoria=" + categoria + ", grade=" + grade
+				+ ", estoqueAtual=" + estoqueAtual + ", estoqueMinimo=" + estoqueMinimo + "]";
 	}
 	
 	@Override
@@ -93,6 +103,7 @@ public class Produto implements Serializable{
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + estoqueAtual;
 		result = prime * result + estoqueMinimo;
+		result = prime * result + ((grade == null) ? 0 : grade.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -120,11 +131,16 @@ public class Produto implements Serializable{
 			return false;
 		if (estoqueMinimo != other.estoqueMinimo)
 			return false;
+		if (grade == null) {
+			if (other.grade != null)
+				return false;
+		} else if (!grade.equals(other.grade))
+			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
-	}	
+	}
 }
