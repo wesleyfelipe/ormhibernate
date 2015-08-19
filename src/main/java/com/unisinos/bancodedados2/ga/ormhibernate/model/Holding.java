@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +29,8 @@ public class Holding implements Serializable {
 	private String nome;
 	
 	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-	@JoinColumn(name="holding", foreignKey = @ForeignKey(name = "fk_empresa_holding"))
+	@JoinColumn(name="holding")
+	@org.hibernate.annotations.ForeignKey(name = "fk_empresa_holding")
 	private List<Empresa> empresas;
 
 	public Holding() {

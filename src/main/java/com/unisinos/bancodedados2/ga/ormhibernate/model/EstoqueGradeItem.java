@@ -34,11 +34,11 @@ public class EstoqueGradeItem implements Serializable{
 	private int estoqueMinimo;
 	
 	@ManyToOne(cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-	@JoinColumn(name = "produto", foreignKey = @ForeignKey(name = "fk_produto_estoqueGradeItem"))
+	@JoinColumn(name = "produto", foreignKey = @ForeignKey(name = "fk_estoqueGradeItem_produto"), nullable = false)
 	private Produto produto;
 	
 	@ManyToOne(cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-	@JoinColumn(name = "gradeItem", foreignKey = @ForeignKey(name = "fk_estoqueGradeItem_gradeitem"))
+	@JoinColumn(name = "gradeItem", foreignKey = @ForeignKey(name = "fk_estoqueGradeItem_gradeitem"), nullable = false)
 	private GradeItem gradeItem;
 	
 	public EstoqueGradeItem(){

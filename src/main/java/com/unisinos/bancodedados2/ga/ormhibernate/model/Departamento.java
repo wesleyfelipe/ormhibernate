@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,11 +26,12 @@ public class Departamento implements Serializable{
 	@SequenceGenerator(name = "seq_Departamento", sequenceName = "s_Departamento", allocationSize = 1)
 	private Long codigo;
 	
-	@Column(length = 50, nullable = false)
+	@Column(length = 255, nullable = false)
 	private String nome;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="departamento", foreignKey = @ForeignKey(name = "fk_secao_departamento"), nullable=false)
+	@JoinColumn(name="departamento", nullable=false)
+	@org.hibernate.annotations.ForeignKey(name = "fk_secao_departamento")
 	private List<Secao> secoes;
 	
 	public Departamento(){

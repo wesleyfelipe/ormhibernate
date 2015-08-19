@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,12 +24,12 @@ public class Grade implements Serializable{
 	@SequenceGenerator(name = "seq_Grade", sequenceName = "s_Grade", allocationSize = 1)
 	private Long codigo;
 	
-	@Column(length = 100, nullable = false)
+	@Column(length = 255, nullable = false)
 	private String nome;
 	
-	//TODO: Nome da chave estrangeira não está sendo alterado no banco
 	@OneToMany(cascade={CascadeType.ALL})
-	@JoinColumn(name="grade", foreignKey = @ForeignKey(name = "fk_gradeitem_grade"), nullable = false)
+	@JoinColumn(name="grade", nullable = false)
+	@org.hibernate.annotations.ForeignKey(name = "fk_gradeitem_grade")
 	private List<GradeItem> itens;
 	
 	public Grade(){

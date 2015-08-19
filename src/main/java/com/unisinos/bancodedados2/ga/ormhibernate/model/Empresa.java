@@ -36,7 +36,8 @@ public class Empresa implements Serializable {
 	private String logradouro;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="empresa", foreignKey = @ForeignKey(name = "fk_loja_empresa"), nullable=false)
+	@JoinColumn(name="empresa", nullable=false)
+	@org.hibernate.annotations.ForeignKey(name = "fk_loja_empresa")
 	private List<Loja> lojas;
 	
 	public Empresa() {

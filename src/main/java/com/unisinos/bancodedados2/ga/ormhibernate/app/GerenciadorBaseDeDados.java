@@ -9,18 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Categoria;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Cor;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Departamento;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Empresa;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.EstoqueGradeItem;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Grade;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.GradeItem;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Holding;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Loja;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Produto;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Secao;
-import com.unisinos.bancodedados2.ga.ormhibernate.model.Tamanho;
+import com.unisinos.bancodedados2.ga.ormhibernate.model.*;
 
 public class GerenciadorBaseDeDados {
 

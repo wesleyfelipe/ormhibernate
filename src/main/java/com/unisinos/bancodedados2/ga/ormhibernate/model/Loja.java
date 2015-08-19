@@ -9,7 +9,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +20,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -47,7 +47,9 @@ public class Loja implements Serializable {
 	@JoinTable(name = "LojaDepartamento",
             joinColumns = @JoinColumn(name = "codigoloja", referencedColumnName="codigo"),
             inverseJoinColumns = @JoinColumn(name = "codigodepartamento",  referencedColumnName="codigo"),
-            uniqueConstraints = @UniqueConstraint(columnNames={"codigoloja","codigodepartamento"}, name="uc_lojadepartamento_loja_departamento"))
+            uniqueConstraints = @UniqueConstraint(columnNames={"codigoloja","codigodepartamento"}, name="uc_lojadepartamento_loja_departamento")
+    )
+	@ForeignKey(name="fk_lojadepartamento_loja", inverseName = "fk_lojadepartamento_departamento")
 	@SequenceGenerator(name = "seq_LojaDepartamento", sequenceName = "s_LojaDepartamento", allocationSize = 1)
 	@CollectionId(
 	        columns = @Column(name="codigo"), 
@@ -57,7 +59,8 @@ public class Loja implements Serializable {
 	private List<Departamento> departamentos;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="loja", foreignKey = @ForeignKey(name = "fk_estoquegradeitem_loja"), nullable=false)
+	@JoinColumn(name="loja", nullable=false)
+	@org.hibernate.annotations.ForeignKey(name = "fk_estoquegradeitem_loja")
 	private List<EstoqueGradeItem> estoque;
 	
 	public Loja() {

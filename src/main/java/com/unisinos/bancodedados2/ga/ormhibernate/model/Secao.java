@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,11 +25,12 @@ public class Secao implements Serializable{
 	@SequenceGenerator(name = "seq_Secao", sequenceName = "s_Secao", allocationSize = 1)
 	private Long codigo;
 	
-	@Column(length = 50, nullable = false)
+	@Column(length = 255, nullable = false)
 	private String nome;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="secao", foreignKey = @ForeignKey(name = "fk_categoria_secao"), nullable=false)
+	@JoinColumn(name="secao", nullable=false)
+	@org.hibernate.annotations.ForeignKey(name = "fk_categoria_secao")
 	private List<Categoria> categorias;
 	
 	public Secao(){

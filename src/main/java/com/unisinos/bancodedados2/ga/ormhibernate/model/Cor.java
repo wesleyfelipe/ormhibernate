@@ -19,7 +19,7 @@ public class Cor implements Serializable {
 	@SequenceGenerator(name = "seq_Cor", sequenceName = "s_Cor", allocationSize = 1)
 	private Long codigo;
 	
-	@Column(length = 50, nullable = false)
+	@Column(length = 255, nullable = false)
 	private String nome;
 
 	public Cor() {

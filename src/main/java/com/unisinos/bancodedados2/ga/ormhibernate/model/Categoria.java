@@ -19,7 +19,7 @@ public class Categoria implements Serializable {
 	@SequenceGenerator(name = "seq_Categoria", sequenceName = "s_Categoria", allocationSize = 1)
 	private Long codigo;
 	
-	@Column(length = 50, nullable = false)
+	@Column(length = 255, nullable = false)
 	private String nome;
 	
 	public Categoria(){

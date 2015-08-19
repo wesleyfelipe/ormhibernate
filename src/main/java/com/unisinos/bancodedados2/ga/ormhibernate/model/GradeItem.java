@@ -32,7 +32,7 @@ public class GradeItem implements Serializable{
 	private Cor cor;
 	
 	@ManyToOne(optional = false, cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-	@JoinColumn(name = "tamanho", foreignKey = @ForeignKey(name = "fk_gradeitem_cor"))
+	@JoinColumn(name = "tamanho", foreignKey = @ForeignKey(name = "fk_gradeitem_tamanho"))
 	private Tamanho tamanho;
 	
 	public GradeItem(){
