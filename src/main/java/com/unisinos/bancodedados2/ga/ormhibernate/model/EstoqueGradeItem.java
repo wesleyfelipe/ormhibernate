@@ -28,10 +28,10 @@ public class EstoqueGradeItem implements Serializable{
 	private Long codigo;
 	
 	@Column
-	private int estoqueAtual;
+	private Integer estoqueAtual;
 	
 	@Column
-	private int estoqueMinimo;
+	private Integer estoqueMinimo;
 	
 	@ManyToOne(cascade={CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "produto", foreignKey = @ForeignKey(name = "fk_estoqueGradeItem_produto"), nullable = false)

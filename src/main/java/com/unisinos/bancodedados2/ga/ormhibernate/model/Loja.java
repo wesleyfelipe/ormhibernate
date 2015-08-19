@@ -41,7 +41,7 @@ public class Loja implements Serializable {
 	private Date dataAbertura;
 	
 	@Column
-	private int totalFuncionarios;
+	private Integer totalFuncionarios;
 	
 	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "LojaDepartamento",

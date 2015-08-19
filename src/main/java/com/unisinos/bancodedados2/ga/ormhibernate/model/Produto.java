@@ -36,10 +36,10 @@ public class Produto implements Serializable{
 	private Grade grade;
 	
 	@Column
-	private int estoqueAtual;
+	private Integer estoqueAtual;
 	
 	@Column
-	private int estoqueMinimo;
+	private Integer estoqueMinimo;
 	
 	public Produto(){
 		super();
