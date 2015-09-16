@@ -14,19 +14,9 @@
 
 	<Lojas>
 		<Loja codigo="1" codigoEmpresa="1" nome="Filial 1" dataAbertura="01/01/2014"
-			totalFuncionarios="16">
-			<Departamentos>
-				<Departamento codigo="1" />
-				<Departamento codigo="2" />
-				<Departamento codigo="3" />
-			</Departamentos>
-		</Loja>
+			totalFuncionarios="16" />
 		<Loja codigo="2" codigoEmpresa="1" nome="Filial 1" dataAbertura="15/02/2014"
-			totalFuncionarios="30">
-			<Departamentos>
-				<Departamento codigo="1" />
-			</Departamentos>
-		</Loja>
+			totalFuncionarios="30" />
 	</Lojas>
 
 	<Departamentos>
@@ -34,5 +24,73 @@
 		<Departamento codigo="2" nome="Masculino" />
 		<Departamento codigo="3" nome="Infantil" />
 	</Departamentos>
+
+	<LojaDepartamentos>
+		<LojaDepartamento codigo="1" codigoLoja="1"
+			codigoDepartamento="1" />
+		<LojaDepartamento codigo="2" codigoLoja="1"
+			codigoDepartamento="2" />
+		<LojaDepartamento codigo="3" codigoLoja="1"
+			codigoDepartamento="3" />
+		<LojaDepartamento codigo="4" codigoLoja="2"
+			codigoDepartamento="1" />
+	</LojaDepartamentos>
+
+	<Secoes>
+		<Secao codigo="1" nome="Sapato" codigoDepartamento="1" />
+		<Secao codigo="2" nome="Pasta" codigoDepartamento="2" />
+	</Secoes>
+
+	<Categorias>
+		<Categoria codigo="1" nome="Scarpin" codigoSecao="1" />
+		<Categoria codigo="2" nome="Rasteirinha" codigoSecao="1" />
+		<Categoria codigo="3" nome="Pasta de mão" codigoSecao="2" />
+	</Categorias>
+
+	<Grades>
+		<Grade codigo="1" nome="Grade Brasil Feminino" />
+		<Grade codigo="2" nome="Grade Brasil Masculino" />
+		<Grade codigo="3" nome="Grade Pasta" />
+	</Grades>
+
+	<Produtos>
+		<Produto codigo="1" nome="Scarpin Velasquez" codigoCategoria="1"
+			codigoGrade="1" estoqueAtual="10" estoqueMinimo="10" />
+	</Produtos>
+
+	<Cores>
+		<Cor codigo="1" nome="Azul" />
+		<Cor codigo="2" nome="Preto" />
+	</Cores>
+
+	<Tamanhos>
+		<Tamanho codigo="1" nome="33" />
+		<Tamanho codigo="2" nome="34" />
+		<Tamanho codigo="3" nome="35" />
+		<Tamanho codigo="4" nome="36" />
+		<Tamanho codigo="5" nome="37" />
+	</Tamanhos>
+
+	<GradeItens>
+		<GradeItem codigo="1" nome="Preto Universo Tamanho 33"
+			codigoGrade="1" codigoCor="2" codigoTamanho="1" />
+		<GradeItem codigo="2" nome="Preto Universo Tamanho 34"
+			codigoGrade="1" codigoCor="2" codigoTamanho="2" />
+		<GradeItem codigo="3" nome="Preto Universo Tamanho 35"
+			codigoGrade="1" codigoCor="2" codigoTamanho="3" />
+		<GradeItem codigo="4" nome="Preto Universo Tamanho 36"
+			codigoGrade="1" codigoCor="2" codigoTamanho="4" />
+		<GradeItem codigo="5" nome="Preto Universo Tamanho 37"
+			codigoGrade="1" codigoCor="2" codigoTamanho="5" />
+	</GradeItens>
+
+	<EstoqueGradeItens>
+		<EstoqueGradeItem codigo="1" codigoGradeItem="1"
+			codigoProduto="1" codigoLoja="1" estoqueAtual="5" estoqueMinimo="2" />
+		<EstoqueGradeItem codigo="2" codigoGradeItem="2"
+			codigoProduto="1" codigoLoja="1" estoqueAtual="2" estoqueMinimo="5" />
+		<EstoqueGradeItem codigo="3" codigoGradeItem="3"
+			codigoProduto="1" codigoLoja="1" estoqueAtual="3" estoqueMinimo="3" />
+	</EstoqueGradeItens>
 
 </Negocio>
