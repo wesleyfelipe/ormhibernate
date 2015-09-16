@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,13 +22,16 @@ public class Empresa implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long codigo;
 
+	@Column(nullable=false)
 	private String fantasia;
 
+	@Column(nullable=false)
 	private String logradouro;
 
+	@Column(nullable=false)
 	private String razaoSocial;
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.PERSIST, optional=false)
 	private Holding holding;
 
 	@OneToMany(mappedBy="empresa", cascade=CascadeType.ALL)

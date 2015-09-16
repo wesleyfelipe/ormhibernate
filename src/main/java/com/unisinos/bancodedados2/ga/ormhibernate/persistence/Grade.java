@@ -15,6 +15,7 @@ public class Grade implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long codigo;
 
+	@Column(nullable=false)
 	private String nome;
 
 	@OneToMany(mappedBy="grade", cascade=CascadeType.ALL)

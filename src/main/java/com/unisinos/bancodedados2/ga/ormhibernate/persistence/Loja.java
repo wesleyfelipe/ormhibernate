@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,14 +28,16 @@ public class Loja implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataAbertura;
 
+	@Column(nullable=false)
 	private String nome;
 
+	@Column(nullable=false)
 	private Integer totalFuncionarios;
 
 	@OneToMany(mappedBy="loja", cascade=CascadeType.ALL)
 	private Set<EstoqueGradeItem> estoqueGradeItems;
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST, optional=false)
 	private Empresa empresa;
 
 	@OneToMany(mappedBy="loja", cascade=CascadeType.ALL)

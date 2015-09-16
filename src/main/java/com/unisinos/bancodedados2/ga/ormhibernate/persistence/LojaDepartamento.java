@@ -7,10 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(name="lojaDepartamento_uc", columnNames={"loja_codigo","departamento_codigo"})})
 public class LojaDepartamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,10 +22,12 @@ public class LojaDepartamento implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long codigo;
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.PERSIST, optional=false)
+	@JoinColumn(name="departamento_codigo")
 	private Departamento departamento;
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.PERSIST, optional=false)
+	@JoinColumn(name="loja_codigo")
 	private Loja loja;
 
 	public LojaDepartamento() {

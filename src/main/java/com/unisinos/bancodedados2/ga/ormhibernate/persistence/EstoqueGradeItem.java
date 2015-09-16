@@ -22,13 +22,13 @@ public class EstoqueGradeItem implements Serializable {
 
 	private Integer estoqueMinimo;
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.PERSIST, optional=false)
 	private GradeItem gradeItem;
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.PERSIST, optional=false)
 	private Loja loja;
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.PERSIST, optional=false)
 	private Produto produto;
 
 	public EstoqueGradeItem() {

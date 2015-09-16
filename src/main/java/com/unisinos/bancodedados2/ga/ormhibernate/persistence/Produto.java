@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,16 +24,17 @@ public class Produto implements Serializable {
 	private Integer estoqueAtual;
 
 	private Integer estoqueMinimo;
-
+	
+	@Column(nullable=false)
 	private String nome;
 
 	@OneToMany(mappedBy="produto", cascade=CascadeType.ALL)
 	private Set<EstoqueGradeItem> estoqueGradeItems;
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.PERSIST, optional=false)
 	private Categoria categoria;
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.PERSIST, optional=false)
 	private Grade grade;
 
 	public Produto() {
