@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Negocio>
+	<Holdings>
+		<Holding codigo="1" nome="Grupo MasBahTchê" />
+	</Holdings>
+
+	<Empresas>
+		<Empresa codigo="1" razaoSocial="Tchê Sapatos Ltda" fantasia="Tchê"
+			logradouro="Rua João Vedelino, 145" codigoHolding="1" />
+		<Empresa codigo="2" razaoSocial="Juca Sapato Feminino Ltda"
+			fantasia="Juca Sapato" logradouro="Rua Zé Teodoro, 666"
+			codigoHolding="1" />
+	</Empresas>
+
+	<Lojas>
+		<Loja codigo="1" codigoEmpresa="1" nome="Filial 1" dataAbertura="01/01/2014"
+			totalFuncionarios="16">
+			<Departamentos>
+				<Departamento codigo="1" />
+				<Departamento codigo="2" />
+				<Departamento codigo="3" />
+			</Departamentos>
+		</Loja>
+		<Loja codigo="2" codigoEmpresa="1" nome="Filial 1" dataAbertura="15/02/2014"
+			totalFuncionarios="30">
+			<Departamentos>
+				<Departamento codigo="1" />
+			</Departamentos>
+		</Loja>
+	</Lojas>
+
+	<Departamentos>
+		<Departamento codigo="1" nome="Feminino" />
+		<Departamento codigo="2" nome="Masculino" />
+		<Departamento codigo="3" nome="Infantil" />
+	</Departamentos>
+
+</Negocio>
