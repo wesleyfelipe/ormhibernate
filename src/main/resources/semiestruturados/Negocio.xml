@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Negocio>
+<Negocio xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="Negocio.xsd">
 	<Holdings>
 		<Holding codigo="1" nome="Grupo MasBahTchê" />
 	</Holdings>
