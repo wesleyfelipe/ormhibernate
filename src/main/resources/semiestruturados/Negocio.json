@@ -1,0 +1,248 @@
+{
+    "Negocio": {
+        "Holdings": {
+            "Holding": {
+                "codigo": "1",
+                "nome": "Grupo MasBahTchê"
+            }
+        },
+        "Empresas": {
+            "Empresa": [
+                {
+                    "codigo": "1",
+                    "razaoSocial": "Tchê Sapatos Ltda",
+                    "fantasia": "Tchê",
+                    "logradouro": "Rua João Vedelino, 145",
+                    "codigoHolding": "1"
+                },
+                {
+                    "codigo": "2",
+                    "razaoSocial": "Juca Sapato Feminino Ltda",
+                    "fantasia": "Juca Sapato",
+                    "logradouro": "Rua Zé Teodoro, 666",
+                    "codigoHolding": "1"
+                }
+            ]
+        },
+        "Lojas": {
+            "Loja": [
+                {
+                    "codigo": "1",
+                    "codigoEmpresa": "1",
+                    "nome": "Filial 1",
+                    "dataAbertura": "01/01/2014",
+                    "totalFuncionarios": "16"
+                },
+                {
+                    "codigo": "2",
+                    "codigoEmpresa": "1",
+                    "nome": "Filial 1",
+                    "dataAbertura": "15/02/2014",
+                    "totalFuncionarios": "30"
+                }
+            ]
+        },
+        "Departamentos": {
+            "Departamento": [
+                {
+                    "codigo": "1",
+                    "nome": "Feminino"
+                },
+                {
+                    "codigo": "2",
+                    "nome": "Masculino"
+                },
+                {
+                    "codigo": "3",
+                    "nome": "Infantil"
+                }
+            ]
+        },
+        "LojaDepartamentos": {
+            "LojaDepartamento": [
+                {
+                    "codigo": "1",
+                    "codigoLoja": "1",
+                    "codigoDepartamento": "1"
+                },
+                {
+                    "codigo": "2",
+                    "codigoLoja": "1",
+                    "codigoDepartamento": "2"
+                },
+                {
+                    "codigo": "3",
+                    "codigoLoja": "1",
+                    "codigoDepartamento": "3"
+                },
+                {
+                    "codigo": "4",
+                    "codigoLoja": "2",
+                    "codigoDepartamento": "1"
+                }
+            ]
+        },
+        "Secoes": {
+            "Secao": [
+                {
+                    "codigo": "1",
+                    "nome": "Sapato",
+                    "codigoDepartamento": "1"
+                },
+                {
+                    "codigo": "2",
+                    "nome": "Pasta",
+                    "codigoDepartamento": "2"
+                }
+            ]
+        },
+        "Categorias": {
+            "Categoria": [
+                {
+                    "codigo": "1",
+                    "nome": "Scarpin",
+                    "codigoSecao": "1"
+                },
+                {
+                    "codigo": "2",
+                    "nome": "Rasteirinha",
+                    "codigoSecao": "1"
+                },
+                {
+                    "codigo": "3",
+                    "nome": "Pasta de mão",
+                    "codigoSecao": "2"
+                }
+            ]
+        },
+        "Grades": {
+            "Grade": [
+                {
+                    "codigo": "1",
+                    "nome": "Grade Brasil Feminino"
+                },
+                {
+                    "codigo": "2",
+                    "nome": "Grade Brasil Masculino"
+                },
+                {
+                    "codigo": "3",
+                    "nome": "Grade Pasta"
+                }
+            ]
+        },
+        "Produtos": {
+            "Produto": {
+                "codigo": "1",
+                "nome": "Scarpin Velasquez",
+                "codigoCategoria": "1",
+                "codigoGrade": "1",
+                "estoqueAtual": "10",
+                "estoqueMinimo": "10"
+            }
+        },
+        "Cores": {
+            "Cor": [
+                {
+                    "codigo": "1",
+                    "nome": "Azul"
+                },
+                {
+                    "codigo": "2",
+                    "nome": "Preto"
+                }
+            ]
+        },
+        "Tamanhos": {
+            "Tamanho": [
+                {
+                    "codigo": "1",
+                    "nome": "33"
+                },
+                {
+                    "codigo": "2",
+                    "nome": "34"
+                },
+                {
+                    "codigo": "3",
+                    "nome": "35"
+                },
+                {
+                    "codigo": "4",
+                    "nome": "36"
+                },
+                {
+                    "codigo": "5",
+                    "nome": "37"
+                }
+            ]
+        },
+        "GradeItens": {
+            "GradeItem": [
+                {
+                    "codigo": "1",
+                    "nome": "Preto Universo Tamanho 33",
+                    "codigoGrade": "1",
+                    "codigoCor": "2",
+                    "codigoTamanho": "1"
+                },
+                {
+                    "codigo": "2",
+                    "nome": "Preto Universo Tamanho 34",
+                    "codigoGrade": "1",
+                    "codigoCor": "2",
+                    "codigoTamanho": "2"
+                },
+                {
+                    "codigo": "3",
+                    "nome": "Preto Universo Tamanho 35",
+                    "codigoGrade": "1",
+                    "codigoCor": "2",
+                    "codigoTamanho": "3"
+                },
+                {
+                    "codigo": "4",
+                    "nome": "Preto Universo Tamanho 36",
+                    "codigoGrade": "1",
+                    "codigoCor": "2",
+                    "codigoTamanho": "4"
+                },
+                {
+                    "codigo": "5",
+                    "nome": "Preto Universo Tamanho 37",
+                    "codigoGrade": "1",
+                    "codigoCor": "2",
+                    "codigoTamanho": "5"
+                }
+            ]
+        },
+        "EstoqueGradeItens": {
+            "EstoqueGradeItem": [
+                {
+                    "codigo": "1",
+                    "codigoGradeItem": "1",
+                    "codigoProduto": "1",
+                    "codigoLoja": "1",
+                    "estoqueAtual": "5",
+                    "estoqueMinimo": "2"
+                },
+                {
+                    "codigo": "2",
+                    "codigoGradeItem": "2",
+                    "codigoProduto": "1",
+                    "codigoLoja": "1",
+                    "estoqueAtual": "2",
+                    "estoqueMinimo": "5"
+                },
+                {
+                    "codigo": "3",
+                    "codigoGradeItem": "3",
+                    "codigoProduto": "1",
+                    "codigoLoja": "1",
+                    "estoqueAtual": "3",
+                    "estoqueMinimo": "3"
+                }
+            ]
+        }
+    }
+}
