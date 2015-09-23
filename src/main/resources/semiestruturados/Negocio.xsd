@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:simpleType name="date">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\d{2}[/]\d{2}[/]\d{4}"></xsd:pattern>
+			<xsd:length value="10" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="Holding">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="nome" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Empresa">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="razaoSocial" type="xsd:string" />
+		<xsd:attribute name="fantasia" type="xsd:string" />
+		<xsd:attribute name="logradouro" type="xsd:string" />
+		<xsd:attribute name="codigoHolding" type="xsd:integer" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Loja">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="nome" type="xsd:string" />
+		<xsd:attribute name="codigoEmpresa" type="xsd:integer" />
+		<xsd:attribute name="dataAbertura" type="date" />
+		<xsd:attribute name="totalFuncionarios" type="xsd:nonNegativeInteger" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Departamento">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="nome" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="LojaDepartamento">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="codigoLoja" type="xsd:integer" />
+		<xsd:attribute name="codigoDepartamento" type="xsd:integer" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Secao">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="nome" type="xsd:string" />
+		<xsd:attribute name="codigoDepartamento" type="xsd:integer" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Categoria">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="nome" type="xsd:string" />
+		<xsd:attribute name="codigoSecao" type="xsd:integer" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Grade">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="nome" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Produto">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="nome" type="xsd:string" />
+		<xsd:attribute name="codigoCategoria" type="xsd:integer" />
+		<xsd:attribute name="codigoGrade" type="xsd:integer" />
+		<xsd:attribute name="estoqueAtual" type="xsd:nonNegativeInteger" />
+		<xsd:attribute name="estoqueMinimo" type="xsd:nonNegativeInteger" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Cor">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="nome" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Tamanho">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="nome" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="GradeItem">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="nome" type="xsd:string" />
+		<xsd:attribute name="codigoGrade" type="xsd:integer" />
+		<xsd:attribute name="codigoCor" type="xsd:integer" />
+		<xsd:attribute name="codigoTamanho" type="xsd:integer" />
+	</xsd:complexType>
+
+	<xsd:complexType name="EstoqueGradeItem">
+		<xsd:attribute name="codigo" type="xsd:integer" />
+		<xsd:attribute name="codigoGradeItem" type="xsd:integer" />
+		<xsd:attribute name="codigoProduto" type="xsd:integer" />
+		<xsd:attribute name="codigoLoja" type="xsd:integer" />
+		<xsd:attribute name="estoqueAtual" type="xsd:nonNegativeInteger" />
+		<xsd:attribute name="estoqueMinimo" type="xsd:nonNegativeInteger" />
+	</xsd:complexType>
+
+	<xsd:element name="Negocio">
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<xsd:element name="Holdings">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Holding" type="Holding" maxOccurs="unbounded"
+								minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="Empresas">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Empresa" type="Empresa" maxOccurs="unbounded"
+								minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="Lojas">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Loja" type="Loja" maxOccurs="unbounded"
+								minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="Departamentos">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Departamento" type="Departamento"
+								maxOccurs="unbounded" minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="LojaDepartamentos">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="LojaDepartamento" type="LojaDepartamento"
+								maxOccurs="unbounded" minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="Secoes">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Secao" type="Secao" maxOccurs="unbounded"
+								minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="Categorias">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Categoria" type="Categoria"
+								maxOccurs="unbounded" minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="Grades">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Grade" type="Grade" maxOccurs="unbounded"
+								minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="Produtos">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Produto" type="Produto" maxOccurs="unbounded"
+								minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="Cores">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Cor" type="Cor" maxOccurs="unbounded"
+								minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="Tamanhos">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Tamanho" type="Tamanho" maxOccurs="unbounded"
+								minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="GradeItens">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="GradeItem" type="GradeItem"
+								maxOccurs="unbounded" minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="EstoqueGradeItens">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="EstoqueGradeItem" type="EstoqueGradeItem"
+								maxOccurs="unbounded" minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
